@@ -14,13 +14,24 @@ load_dotenv()
 deployment_name = os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME")
 api_version = os.getenv("AZURE_OPENAI_API_VERSION")
 api_key = os.getenv("AZURE_OPENAI_API_KEY")
-endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
+azure_endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
+print("Deployment Name:", os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME"))
+print("API Version:", os.getenv("AZURE_OPENAI_API_VERSION"))
+print("API Key:", os.getenv("AZURE_OPENAI_API_KEY"))
+print("Endpoint:", os.getenv("AZURE_OPENAI_ENDPOINT"))
+
+
+
+# Check if all required environment variables are loaded
+if not all([deployment_name, api_version, api_key, azure_endpoint]):
+    raise ValueError("One or more Azure OpenAI environment variables are missing. Please check your .env file.")
+
 
 chat = AzureChatOpenAI(
-    deployment_name=deployment_name,
+    azure_deployment=deployment_name,
+    azure_endpoint=azure_endpoint,
     openai_api_version=api_version,
     openai_api_key=api_key,
-    openai_api_base=endpoint,
     temperature=0.2
 )
 
