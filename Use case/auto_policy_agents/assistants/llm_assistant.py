@@ -8,6 +8,9 @@ from dotenv import load_dotenv
 import os
 load_dotenv()
 # Make sure these are set in your environment or use os.environ[...] here
+
+
+
 deployment_name = os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME")
 api_version = os.getenv("AZURE_OPENAI_API_VERSION")
 api_key = os.getenv("AZURE_OPENAI_API_KEY")
