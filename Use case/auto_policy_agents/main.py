@@ -5,6 +5,7 @@ from agents.eligibility_agent import eligibility_agent
 from agents.scoring_agent import scoring_agent
 from agents.explainer_agent import explainer_agent
 from agents.feedback_agent import feedback_agent
+from agents.cf_agent import collaborative_filtering_agent
 from agents.reflection_agent import reflection_agent
 from datetime import date
 
@@ -91,8 +92,12 @@ if submit:
 
     builder.set_entry_point("Intake")
     builder.add_edge("Intake", "Eligibility")
-    builder.add_edge("Eligibility", "Scoring")
-    builder.add_edge("Scoring", "Explainer")
+    builder.add_node("CollaborativeFiltering", collaborative_filtering_agent)
+    builder.add_edge("Eligibility", "CollaborativeFiltering")
+    builder.add_edge("CollaborativeFiltering", "Scoring")
+
+    # builder.add_edge("Eligibility", "Scoring")
+    # builder.add_edge("Scoring", "Explainer")
     # builder.add_edge("Explainer", "Feedback")
     # builder.add_edge("Feedback", "Reflection")
     builder.add_edge("Explainer", "Reflection")

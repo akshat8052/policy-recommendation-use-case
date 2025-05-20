@@ -8,3 +8,5 @@ class State(BaseModel):
     explanation: Optional[str] = ""
     feedback: Optional[str] = ""
     reflection: Optional[str] = ""
+    cf_policies: Optional[List[Dict]] = Field(default_factory=list)
+
