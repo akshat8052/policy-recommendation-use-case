@@ -1,15 +1,20 @@
 
 
 from langchain.chat_models import AzureChatOpenAI
+import os
 from langchain.schema import HumanMessage
 
+from dotenv import load_dotenv
 import os
 
+
+
+
 # Make sure these are set in your environment or use os.environ[...] here
-deployment_name = "gpt-4o"
-api_version = "2025-01-01-preview"
-api_key = "AnuXnEw1fmHLzMOfSvX8RlBXw8HuMd5peMVRvwSvR5kwJWFEMQAxJQQJ99BBACHYHv6XJ3w3AAABACOGIFW3"
-endpoint = "https://genaisolution04.openai.azure.com"
+deployment_name = os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME")
+api_version = os.getenv("AZURE_OPENAI_API_VERSION")
+api_key = os.getenv("AZURE_OPENAI_API_KEY")
+endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
 
 chat = AzureChatOpenAI(
     deployment_name=deployment_name,
